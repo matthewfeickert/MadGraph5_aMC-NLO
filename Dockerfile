@@ -33,7 +33,7 @@ RUN useradd -m docker && \
     chown -R --from=root docker /home/docker
 
 # Move files someplace
-RUN cp -r /root/MG5_aMC_v2_6_6 . && \
+RUN cp -r /root/MG5_aMC_v2_6_6 /home/docker/ && \
     chown -R --from=root docker /home/docker
 
 # Use C.UTF-8 locale to avoid issues with ASCII encoding
