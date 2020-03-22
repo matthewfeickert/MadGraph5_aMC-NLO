@@ -9,6 +9,7 @@ SHELL [ "/bin/bash", "-c" ]
 
 RUN apt-get -qq -y update && \
     apt-get -qq -y install \
+      g++ \
       gfortran \
       wget && \
     apt-get -y autoclean && \
