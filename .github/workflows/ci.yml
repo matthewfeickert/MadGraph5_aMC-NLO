@@ -19,7 +19,7 @@ jobs:
       with:
         repository: matthewfeickert/madgraph5-amc-nlo
         dockerfile: Dockerfile
-        tags: '$GITHUB_SHA'
+        tags: test 
         tag_with_sha: true
         tag_with_ref: true
         push: false
