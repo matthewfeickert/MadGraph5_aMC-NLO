@@ -46,5 +46,6 @@ WORKDIR ${HOME}/data
 #ENV USER docker
 #USER docker
 ENV PATH ${HOME}/.local/bin:$PATH
+ENV PATH /root/MG5_aMC_v2_7_2/bin:$PATH
 
 CMD [ "/bin/bash" ]
