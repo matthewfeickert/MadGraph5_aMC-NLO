@@ -8,7 +8,9 @@ WORKDIR /root
 SHELL [ "/bin/bash", "-c" ]
 
 RUN apt-get -qq -y update && \
-    apt-get -qq -y install gfortran && \
+    apt-get -qq -y install \
+      gfortran \
+      wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
