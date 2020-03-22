@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7-slim
 
 MAINTAINER Matthew Feickert <matthewfeickert@users.noreply.github.com>
 
@@ -8,15 +8,14 @@ WORKDIR /root
 SHELL [ "/bin/bash", "-c" ]
 
 RUN apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
     apt-get -qq -y install gfortran && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
 
 # Install MadGraph5_aMC@NLO
-ARG MG_VERSION=2.6.6
-RUN wget -q https://launchpad.net/mg5amcnlo/2.0/2.6.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
+ARG MG_VERSION=2.7.2
+RUN wget -q https://launchpad.net/mg5amcnlo/2.0/2.7.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
     tar xzf MG5_aMC_v${MG_VERSION}.tar.gz && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
@@ -33,7 +32,7 @@ RUN useradd -m docker && \
     chown -R --from=root docker /home/docker
 
 # Move files someplace
-RUN cp -r /root/MG5_aMC_v2_6_6 /home/docker/ && \
+RUN cp -r /root/MG5_aMC_v2_7_2 /home/docker/ && \
     chown -R --from=root docker /home/docker
 
 # Use C.UTF-8 locale to avoid issues with ASCII encoding
