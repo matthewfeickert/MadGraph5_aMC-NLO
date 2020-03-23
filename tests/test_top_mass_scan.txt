@@ -1,7 +1,7 @@
 # c.f. https://answers.launchpad.net/mg5amcnlo/+faq/2186
 generate p p > t t~ j
-output MYDIRECTORY
-launch MYDIRECTORY
+output top_mass_scan
+launch top_mass_scan
    set mt 170 # changing the top mass
    set wt Auto # changing the top width
    set ptj 40 # changing the ptj cut
@@ -11,5 +11,5 @@ launch
 launch
    set mt 180 # changing the top mass
    set wt Auto # changing the top width
-launch MYDIRECTORY -i
+launch top_mass_scan -i
    print_results --path=./cross_section_top.txt --format=short
