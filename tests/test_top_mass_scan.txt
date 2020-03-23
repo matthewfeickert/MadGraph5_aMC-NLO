@@ -12,4 +12,4 @@ launch
    set mt 180 # changing the top mass
    set wt Auto # changing the top width
 launch top_mass_scan -i
-   print_results --path=./cross_section_top.txt --format=short
+   print_results --path=./top_mass_scan/cross_section_top.txt --format=short
