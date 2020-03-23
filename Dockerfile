@@ -3,7 +3,7 @@ FROM python:2.7-slim
 MAINTAINER Matthew Feickert <matthewfeickert@users.noreply.github.com>
 
 USER root
-WORKDIR /root
+WORKDIR /usr/local
 
 SHELL [ "/bin/bash", "-c" ]
 
@@ -20,7 +20,8 @@ RUN apt-get -qq -y update && \
 
 # Install MadGraph5_aMC@NLO
 ARG MG_VERSION=2.7.2
-RUN wget -q https://launchpad.net/mg5amcnlo/2.0/2.7.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
+RUN cd /usr/local && \
+    wget -q https://launchpad.net/mg5amcnlo/2.0/2.7.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
     tar xzf MG5_aMC_v${MG_VERSION}.tar.gz && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
@@ -37,7 +38,7 @@ RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shell
 #    chown -R --from=root docker /home/docker
 #
 ## Move files someplace
-#RUN cp -r /root/MG5_aMC_v2_7_2 /home/docker/ && \
+#RUN cp -r /usr/local/MG5_aMC_v2_7_2 /home/docker/ && \
 #    chown -R --from=root docker /home/docker
 
 # Use C.UTF-8 locale to avoid issues with ASCII encoding
@@ -49,6 +50,6 @@ WORKDIR ${HOME}/data
 #ENV USER docker
 #USER docker
 ENV PATH ${HOME}/.local/bin:$PATH
-ENV PATH /root/MG5_aMC_v2_7_2/bin:$PATH
+ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
 
 ENTRYPOINT [ "/bin/bash" ]
