@@ -119,13 +119,3 @@ ENV PATH ${HOME}/.local/bin:$PATH
 ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
 
 ENTRYPOINT [ "/bin/bash" ]
-
-#load MG5 configuration from ../../../../../../usr/local/MG5_aMC_v2_7_2/input/mg5_configuration.txt
-#fastjet-config does not seem to correspond to a valid fastjet-config executable (v3+). We will use fjcore instead.
-# Please set the 'fastjet'variable to the full (absolute) /PATH/TO/fastjet-config (including fastjet-config).
-# MG5_aMC> set fastjet /PATH/TO/fastjet-config
-#
-#lhapdf-config does not seem to correspond to a valid lhapdf-config executable.
-#Please set the 'lhapdf' variable to the (absolute) /PATH/TO/lhapdf-config (including lhapdf-config).
-#Note that you can still compile and run aMC@NLO with the built-in PDFs
-# MG5_aMC> set lhapdf /PATH/TO/lhapdf-config
