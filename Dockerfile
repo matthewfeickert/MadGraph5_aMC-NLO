@@ -49,4 +49,4 @@ WORKDIR ${HOME}/data
 ENV PATH ${HOME}/.local/bin:$PATH
 ENV PATH /root/MG5_aMC_v2_7_2/bin:$PATH
 
-CMD [ "/bin/bash" ]
+ENTRYPOINT [ "/bin/bash" ]
