@@ -13,6 +13,7 @@ RUN apt-get -qq -y update && \
       g++ \
       gfortran \
       make \
+      vim \
       wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
