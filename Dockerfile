@@ -21,7 +21,7 @@ RUN apt-get -qq -y update && \
 
 # Install MadGraph5_aMC@NLO
 ARG FASTJET_VERSION=3.3.3
-mkdir /code && \
+RUN mkdir /code && \
     cd /code && \
     wget http://fastjet.fr/repo/fastjet-${FASTJET_VERSION}.tar.gz && \
     tar xvfz fastjet-${FASTJET_VERSION}.tar.gz && \
