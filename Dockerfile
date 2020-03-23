@@ -19,6 +19,22 @@ RUN apt-get -qq -y update && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
 
+# Install LHAPDF
+ARG LHAPDF_VERSION=6.2.3
+RUN mkdir /code && \
+    cd /code && \
+    wget https://lhapdf.hepforge.org/downloads/?f=LHAPDF-${LHAPDF_VERSION}.tar.gz -O LHAPDF-${LHAPDF_VERSION}.tar.gz && \
+    tar xvfz LHAPDF-${LHAPDF_VERSION}.tar.gz && \
+    cd LHAPDF-${LHAPDF_VERSION} && \
+    ./configure --help && \
+    export CXX=$(which g++) && \
+    export PYTHON=$(which python) && \
+    ./configure \
+      --prefix=/usr/local && \
+    make -j$(($(nproc) - 1)) && \
+    make install && \
+    rm -rf /code
+
 # Install FastJet
 ARG FASTJET_VERSION=3.3.3
 RUN mkdir /code && \
