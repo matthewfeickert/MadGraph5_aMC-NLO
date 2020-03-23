@@ -19,7 +19,7 @@ RUN apt-get -qq -y update && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
 
-# Install MadGraph5_aMC@NLO
+# Install FastJet
 ARG FASTJET_VERSION=3.3.3
 RUN mkdir /code && \
     cd /code && \
@@ -70,6 +70,8 @@ ENV HOME /home/docker
 WORKDIR ${HOME}/data
 #ENV USER docker
 #USER docker
+ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
+ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV PATH ${HOME}/.local/bin:$PATH
 ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
 
