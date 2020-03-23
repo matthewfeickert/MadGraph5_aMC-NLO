@@ -14,6 +14,11 @@ RUN apt-get -qq -y update && \
       gfortran \
       make \
       vim \
+      zlibc \
+      zlib1g-dev \
+      libbz2-dev \
+      rsync \
+      python2-dev \
       wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
@@ -49,6 +54,28 @@ RUN mkdir /code && \
     export PYTHON=$(which python) && \
     ./configure \
       --prefix=/usr/local && \
+    make -j$(($(nproc) - 1)) && \
+    make install && \
+    rm -rf /code
+
+# Install PYTHIA
+ARG PYTHIA_VERSION=8301
+# PYTHON_VERSION already exists in the base image
+RUN mkdir /code && \
+    cd /code && \
+    wget http://home.thep.lu.se/~torbjorn/pythia8/pythia${PYTHIA_VERSION}.tgz && \
+    tar xvfz pythia${PYTHIA_VERSION}.tgz && \
+    cd pythia${PYTHIA_VERSION} && \
+    ./configure --help && \
+    export PYTHON_MINOR_VERSION=${PYTHON_VERSION::-2} && \
+    ./configure \
+      --prefix=/usr/local \
+      --arch=Linux \
+      --cxx=g++ \
+      --with-gzip \
+      --with-python-bin=/usr/local/bin \
+      --with-python-lib=/usr/lib/python${PYTHON_MINOR_VERSION} \
+      --with-python-include=/usr/include/python${PYTHON_MINOR_VERSION} && \
     make -j$(($(nproc) - 1)) && \
     make install && \
     rm -rf /code
