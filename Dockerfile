@@ -87,6 +87,12 @@ RUN cd /usr/local && \
     tar xzf MG5_aMC_v${MG_VERSION}.tar.gz && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
+# Install NumPy and pylhe
+COPY requirements.txt requirements.txt
+RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
+    python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
+    rm requirements.txt
+
 # Enable tab completion by uncommenting it from /etc/bash.bashrc
 # The relevant lines are those below the phrase "enable bash completion in interactive shells"
 RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shells|=' /etc/bash.bashrc)+1)),$(($(sed -n '\|enable bash completion in interactive shells|=' /etc/bash.bashrc)+7))" && \
