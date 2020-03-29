@@ -31,7 +31,7 @@ jobs:
         -v $PWD:$PWD
         -w $PWD
         matthewfeickert/madgraph5-amc-nlo:test
-        "mg5_aMC tests/test_top_mass_scan.txt"
+        "mg5_aMC tests/test_top_mass_scan.mg5"
     - name: Check Python installs
       run: >-
         docker run --rm
