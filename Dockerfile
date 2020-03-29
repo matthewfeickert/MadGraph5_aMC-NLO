@@ -134,5 +134,12 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV PATH ${HOME}/.local/bin:$PATH
 ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
 
+RUN mkdir /code && \
+    cd /code && \
+    echo "install hepmc" > install.mg5 && \
+    echo "install pythia8" >> install.mg5 && \
+    mg5_aMC install.mg5 && \
+    rm -rf /code
+
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
 CMD ["/bin/bash"]
