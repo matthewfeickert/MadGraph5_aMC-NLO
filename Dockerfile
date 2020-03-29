@@ -90,10 +90,9 @@ RUN cd /usr/local && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
 # Install NumPy, pylhe, and jupyter
-ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
 COPY requirements.txt requirements.txt
 RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
+    PYTHONPATH=/usr/local/lib python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
     rm requirements.txt && \
     jupyter notebook --generate-config && \
     sed -i -e "/allow_root/ a c.NotebookApp.allow_root = True" ~/.jupyter/jupyter_notebook_config.py && \
@@ -127,7 +126,7 @@ ENV HOME /home/docker
 WORKDIR ${HOME}/data
 #ENV USER docker
 #USER docker
-#ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
+ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV PATH ${HOME}/.local/bin:$PATH
 ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
