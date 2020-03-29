@@ -92,7 +92,8 @@ RUN cd /usr/local && \
 # Install NumPy, pylhe, and jupyter
 COPY requirements.txt requirements.txt
 RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    PYTHONPATH=/usr/local/lib python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
+    python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
+    python -m pip install --no-cache-dir numpythia && \
     rm requirements.txt && \
     jupyter notebook --generate-config && \
     sed -i -e "/allow_root/ a c.NotebookApp.allow_root = True" ~/.jupyter/jupyter_notebook_config.py && \
