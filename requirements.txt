@@ -1,2 +1,2 @@
 numpy~=1.16
-pylhe~=0.0
+git+https://github.com/lukasheinrich/pylhe.git#egg=pylhe
