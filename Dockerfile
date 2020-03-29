@@ -88,11 +88,16 @@ RUN cd /usr/local && \
     tar xzf MG5_aMC_v${MG_VERSION}.tar.gz && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
-# Install NumPy and pylhe
+# Install NumPy, pylhe, and jupyter
 COPY requirements.txt requirements.txt
 RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
     python -m pip install --upgrade --no-cache-dir -r requirements.txt && \
-    rm requirements.txt
+    rm requirements.txt && \
+    jupyter notebook --generate-config && \
+    sed -i -e "/allow_root/ a c.NotebookApp.allow_root = True" ~/.jupyter/jupyter_notebook_config.py && \
+    sed -i -e "/custom_display_url/ a c.NotebookApp.custom_display_url = \'http://localhost:8888\'" ~/.jupyter/jupyter_notebook_config.py && \
+    sed -i -e "/c.NotebookApp.ip/ a c.NotebookApp.ip = '0.0.0.0'" ~/.jupyter/jupyter_notebook_config.py && \
+    sed -i -e "/open_browser/ a c.NotebookApp.open_browser = False" ~/.jupyter/jupyter_notebook_config.py
 
 # Enable tab completion by uncommenting it from /etc/bash.bashrc
 # The relevant lines are those below the phrase "enable bash completion in interactive shells"

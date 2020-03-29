@@ -1,2 +1,3 @@
 numpy~=1.16
 git+https://github.com/lukasheinrich/pylhe.git#egg=pylhe
+jupyter
