@@ -18,6 +18,7 @@ RUN apt-get -qq -y update && \
       zlib1g-dev \
       libbz2-dev \
       rsync \
+      git \
       bash-completion \
       python2-dev \
       wget && \
