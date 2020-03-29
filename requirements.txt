@@ -1,3 +1,4 @@
 numpy~=1.16
-pylhe~=0.0
+pylhe==0.0.2
+matplotlib~=2.2
 jupyter
