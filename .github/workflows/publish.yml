@@ -22,4 +22,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: matthewfeickert/madgraph5-amc-nlo
         dockerfile: Dockerfile
-        tags: pyhs575
+        tags: phys575
