@@ -21,6 +21,14 @@ docker run --rm -it -v $PWD:$PWD -w $PWD -p 8888:8888 matthewfeickert/madgraph5-
 ```
 
 This will drop you into an interactive Bash session _inside_ of the Docker container.
+You'll see that MadGraph is in `PATH`
+
+```
+# which mg5_aMC
+/usr/local/MG5_aMC_v2_7_2/bin/mg5_aMC
+```
+
+so you don't need to source anything to get your environment ready for use &mdash; you're good to go.
 
 If you want you can also create a Shell alias for this command so that you just have to type your alias to run it
 
