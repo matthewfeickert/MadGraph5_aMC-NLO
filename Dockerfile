@@ -1,6 +1,4 @@
-FROM python:2.7-slim
-
-MAINTAINER Matthew Feickert <matthewfeickert@users.noreply.github.com>
+FROM python:3.7-slim
 
 USER root
 WORKDIR /usr/local
@@ -19,14 +17,14 @@ RUN apt-get -qq -y update && \
       libbz2-dev \
       rsync \
       bash-completion \
-      python2-dev \
+      python3-dev \
       wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 # Install FastJet
-ARG FASTJET_VERSION=3.3.3
+ARG FASTJET_VERSION=3.3.4
 RUN mkdir /code && \
     cd /code && \
     wget http://fastjet.fr/repo/fastjet-${FASTJET_VERSION}.tar.gz && \
@@ -44,7 +42,7 @@ RUN mkdir /code && \
     rm -rf /code
 
 # Install LHAPDF
-ARG LHAPDF_VERSION=6.2.3
+ARG LHAPDF_VERSION=6.3.0
 RUN mkdir /code && \
     cd /code && \
     wget https://lhapdf.hepforge.org/downloads/?f=LHAPDF-${LHAPDF_VERSION}.tar.gz -O LHAPDF-${LHAPDF_VERSION}.tar.gz && \
@@ -60,7 +58,7 @@ RUN mkdir /code && \
     rm -rf /code
 
 # Install PYTHIA
-ARG PYTHIA_VERSION=8301
+ARG PYTHIA_VERSION=8302
 # PYTHON_VERSION already exists in the base image
 RUN mkdir /code && \
     cd /code && \
@@ -81,10 +79,10 @@ RUN mkdir /code && \
     make install && \
     rm -rf /code
 
-# Install MadGraph5_aMC@NLO
-ARG MG_VERSION=2.7.2
+# Install MadGraph5_aMC@NLO for Python 3
+ARG MG_VERSION=2.7.0
 RUN cd /usr/local && \
-    wget -q https://launchpad.net/mg5amcnlo/2.0/2.7.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
+    wget -q https://launchpad.net/mg5amcnlo/python3/py3.0.2/+download/MG5_aMC_v${MG_VERSION}.py3.tar.gz && \
     tar xzf MG5_aMC_v${MG_VERSION}.tar.gz && \
     rm MG5_aMC_v${MG_VERSION}.tar.gz
 
@@ -117,6 +115,7 @@ WORKDIR ${HOME}/data
 ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV PATH ${HOME}/.local/bin:$PATH
-ENV PATH /usr/local/MG5_aMC_v2_7_2/bin:$PATH
+ENV PATH /usr/local/MG5_aMC_v2_7_0/bin:$PATH
 
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
+CMD ["/bin/bash"]
