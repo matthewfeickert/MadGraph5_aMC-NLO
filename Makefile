@@ -5,6 +5,7 @@ all: image
 image:
 	docker build . \
 	-f Dockerfile \
+	--build-arg BUILDER_IMAGE=python:3.7-slim \
 	--build-arg FASTJET_VERSION=3.3.4 \
 	--build-arg LHAPDF_VERSION=6.3.0 \
 	--build-arg PYTHIA_VERSION=8302 \

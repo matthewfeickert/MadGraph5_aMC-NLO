@@ -1,4 +1,5 @@
-FROM python:3.7-slim
+ARG BUILDER_IMAGE=python:3.7-slim
+FROM ${BUILDER_IMAGE} as builder
 
 USER root
 WORKDIR /usr/local
