@@ -31,4 +31,4 @@ jobs:
         -v $PWD:$PWD
         -w $PWD
         matthewfeickert/madgraph5-amc-nlo:test
-        -c "mg5_aMC tests/test_top_mass_scan.txt"
+        "mg5_aMC tests/test_top_mass_scan.txt"
