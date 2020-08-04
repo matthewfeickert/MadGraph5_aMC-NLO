@@ -1,4 +1,4 @@
-ARG BUILDER_IMAGE=python:3.7-slim
+ARG BUILDER_IMAGE=python:3.8-slim
 FROM ${BUILDER_IMAGE} as builder
 
 USER root
